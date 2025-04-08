@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { mailController } from './adapters/in/web/controller/email.controller';
 import { SendMailUsecase } from './core/usecases/SendMailUsecase';
 import { EmailMapper } from './adapters/in/web/controller/dto/email.mapper';
+import { LoggerService } from 'src/Logger/logger.service';
 
 @Module({
   imports: [],
@@ -11,6 +12,10 @@ import { EmailMapper } from './adapters/in/web/controller/dto/email.mapper';
       provide: 'SendEmailInputPort',
       useClass: SendMailUsecase,
     },
+    {
+      provide: LoggerService,
+      useValue: LoggerService.getLogger()
+    }
   ],
   controllers: [mailController],
 })

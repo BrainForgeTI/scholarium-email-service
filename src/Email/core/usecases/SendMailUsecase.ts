@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import { EmailModelIn } from '../domain/models/EmailModelIn';
 import { Injectable } from '@nestjs/common';
+import { LoggerService } from 'src/Logger/logger.service';
 
 @Injectable()
 export class SendMailUsecase implements SendEmailInputPort {
@@ -19,7 +20,6 @@ export class SendMailUsecase implements SendEmailInputPort {
       text: `Seu código de acesso é: ${token}.`,
       html: `<p>Seu código de acesso é: ${token}.</p> `,
     };
-
     await transport.sendMail(options);
     console.log('Email sent successfully!');
   }
